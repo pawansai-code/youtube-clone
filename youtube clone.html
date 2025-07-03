@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Youtube Replica</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+  </head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,100&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body{
+        font-family: 'roboto', sans-serif;
+    }
+
+    /*header start*/
+
+    .material-icons{
+        color: rgb(40, 37, 37)
+    }
+
+    .header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+        padding: 15px;
+    }
+
+    .header-left{
+        display: flex;
+        align-items: center;
+    }
+
+    .header-left img{
+        width: 100px;
+        margin-left: 15px;
+    }
+
+    .header i{
+        padding: 0px 7px;
+        cursor: pointer;
+    }
+
+    .header-search{
+        display: flex;
+    }
+
+    .header-search form{
+        border: 1px solid #ddd;
+        height: 35px;
+        display: flex;
+        border: none;
+    }
+
+    .header-search input{
+        width: 500px;
+        padding: 5px;
+        border-top-left-radius: 40px;
+        border-bottom-left-radius: 40px;
+        border-right: none;
+    }
+
+    .header-search button{
+        height: 100%;
+        border-top-right-radius: 40px;
+        border-bottom-right-radius: 40px;
+        border-left: none;
+    }
+
+    .search-mic{
+        margin-left: 10px;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        background-color: #f9f9f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .search-mic:hover{
+        background-color: #e5e5e5;
+    }
+
+    /*header ends*/
+
+
+    /*mainbody Starts*/
+
+    .mainBody{
+        height: calc(100vh-70px);
+        display: flex;
+        overflow: hidden;
+    }
+
+    /*sidebar start*/
+
+    .sidebar{
+        height: 100vh;
+        width: 230px;
+        background-color: white;
+        overflow-y: auto;
+        scrollbar-width: thin; 
+        scrollbar-color: #999 #f5f5f5;
+}
+
+    .sidebar::-webkit-scrollbar-thumb {
+        background-color: #999;
+        border-radius: 10px;
+        border: 1px solid transparent;
+    }
+    
+
+    .sidebar-categories{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .sidebar-category{
+        display: flex;
+        align-items: center;
+        padding: 12px 25px;
+    }
+
+    .sidebar-category{
+        margin-left: 15px;
+    }
+
+    .sidebar-category:hover{
+        background-color: #e5e5e5;
+        cursor: pointer;
+    }
+
+    .sidebar::-webkit-scrollbar{
+        display: none;
+    }
+
+    .sidebar::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 3px;
+    }
+    .sidebar::-webkit-scrollbar-track {
+        background: #f5f5f5; 
+    }
+
+    .sidebar::-webkit-scrollbar-thumb {
+        background-color: #999;
+        border-radius: 10px;
+        border: 1px solid transparent;
+    }
+    .sidebar::-webkit-scrollbar {
+        width: 0;
+    }
+
+
+    hr{
+        height: 1px;
+        background-color: #e5e5e5;
+        border: none;
+
+    }
+
+    /*sidebar*/
+
+    /*recommend starts*/
+
+    .recommend span{
+        margin-left: 10px;
+        height: 100%;
+        width: 50px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 5px 5px;
+    }
+
+    .recommend span:hover{
+        background-color: #e5e5e5;
+        cursor: pointer;
+    }
+
+    /*videos starts*/
+
+    .videos{
+        background-color: #f9f9f9;
+        width: 100%;
+        height: 100%;
+        padding: 15px 75px;
+        border-top: 1px solid #ddd;
+        overflow-y: scroll;
+        
+    }
+
+    .videos-container{
+        margin-top: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 15px;
+        
+    }
+
+    .video{
+        width: 350px;
+        height: 240px;
+        margin-bottom: 30px;
+        
+    }
+
+    .video-thumbnail{
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        
+    }
+
+    .video-thumbnail img{
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .author img{
+        object-fit: cover;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+
+    .video-detail{
+        display: flex;
+        margin-top: 10px;
+    }
+
+    .title{
+        color: rgb(3, 3, 3);
+        line-height: 18px;
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .title a,span{
+        text-decoration: none;
+        color: rgb(96, 96, 96);
+        font-size: 14px;
+    }
+
+
+
+
+
+
+
+</style>
+  </style>
+  <body>
+    <!--header start-->
+    <div class="header">
+      <div class="header-left">
+         <i class="material-icons">menu</i>
+        <img src="youtube_image1.jpg" alt="logo">
+      </div>
+      <div class="header-search">
+        <form action="">
+            <input type="text" placeholder="search">
+            <button>
+                <i class="material-icons">search</i>
+            </button>
+        </form>
+        <div class="search-mic">
+            <i class="material-icons">mic</i>
+        </div>
+      </div>
+      <div class="header-icons">
+        <i class="material-icons">video_call</i>
+        <i class="material-icons">notifications</i>
+        <i class="material-icons">account_circle</i>
+      </div>
+    </div>
+    <!--header start-->
+
+    <!--mainbody start-->
+
+    <div class="mainBody">
+        <div class="sidebar">
+            <div class="sidebar-categories">
+                <div class="sidebar-category">
+                    <i class="material-icons">home</i>
+                    <span>Home</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">ondemand_video</i>
+                    <span>Shorts</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">subscriptions</i>
+                    <span>Subscription</span>
+                </div>
+            </div>
+            <hr>
+            <div class="sidebar-categories">
+                <div class="sidebar-category">
+                    <i class="material-icons">switch_account</i>
+                    <span>Your channel</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">history</i>
+                    <span>History</span>
+                </div>
+                
+                <div class="sidebar-category">
+                    <i class="material-icons">playlist_play</i>
+                    <span>Playlists</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">smart_display</i>
+                    <span>Your videos</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">lightbulb_outline</i>
+                    <span>Your courses</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">watch_later</i>
+                    <span>Watch later</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">thumb_up</i>
+                    <span>Liked videos</span>
+                </div>
+            </div>
+            <hr>
+            <hr>
+            <div class="sidebar-categories">
+                <div class="sidebar-category">
+                    <i class="material-icons">local_fire_department</i>
+                    <span>Trending</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">local_mall</i>
+                    <span>Shopping</span>
+                </div>
+                
+                <div class="sidebar-category">
+                    <i class="material-icons">audiotrack</i>
+                    <span>Music</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">movie</i>
+                    <span>Films</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">sensors</i>
+                    <span>Live</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">sports_esports</i>
+                    <span>Gaming</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">newspaper</i>
+                    <span>News</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">school</i>
+                    <span>Courses</span>
+                </div>
+                <div class="sidebar-category">
+                    <i class="material-icons">wifi_tethering</i>
+                    <span>Podcasts</span>
+                </div>
+            </div>
+            <hr>
+        </div>
+    <!--sidebar Ends-->
+
+    <div class="videos">
+<!--recommend start-->
+
+        <div class="recommend">
+            <span>All</span>
+            <span>Marvel Entertainment</span>
+            <span>live</span>
+            <span>Music</span>
+            <span>Podcast</span>
+            <span>Web development</span>
+            <span>Communication</span>
+            <span>Motivation</span>
+            <span>New to you</span>
+            <span>Fullstack</span>
+            <span>TED</span>
+            <span>History</span>
+            <span>Linked in</span>
+        </div>
+        <!--recommend ends-->
+
+        <div class="videos-container">
+            <!--video starts-->
+
+            <div class="video">
+                <div class="video-thumbnail">
+                    <img src="thumbnail_img1.jpg">
+                </div>
+                <div class="video-detail">
+                    <div class="author">
+                        <img src="siddahmed1.jpg">
+                    </div>
+                    <div class="title">
+                        <h3>Hustle Never Stops! 🔥 Hardworking Entrepreneur| Sidd Ahmed</h3>
+                        <a href="#">Sidd Ahmed</a>
+                        <span>1M views 3 Months Ago</span>
+                    </div>
+                </div>
+            </div>
+            <!--video end-->
+
+            <!--video starts-->
+
+            <div class="video">
+                <div class="video-thumbnail">
+                    <img src="thumbnail_img2.jpg">
+                </div>
+                <div class="video-detail">
+                    <div class="author">
+                        <img src="epaphra.jpg">
+                    </div>
+                    <div class="title">
+                        <h3>Create a business in 30 minutes | Epaphra x Sanjeev | TheThirdLane Podcast EP: 05 - YouTube</h3>
+                        <a href="#">Explore with Epaphra</a>
+                        <span>80k views 8 Months Ago</span>
+                    </div>
+                </div>
+            </div>
+            <!--video end-->
+
+            <!--video starts-->
+
+            <div class="video">
+                <div class="video-thumbnail">
+                    <img src="thumbnail_img3.jpg">
+                </div>
+                <div class="video-detail">
+                    <div class="author">
+                        <img src="sunpic.jpg">
+                    </div>
+                    <div class="title">
+                        <h3>Chikitu Vibe - Official Music Video | COOLIE | Superstar Rajinikanth | Sun Pictures | Lokesh | Anirudh</h3>
+                        <a href="#">Sun Tv</a>
+                        <span>8M views 7days Ago</span>
+                    </div>
+                </div>
+            </div>
+            <!--video end-->
+
+            <!--video starts-->
+
+            <div class="video">
+                <div class="video-thumbnail">
+                    <img src="https://i.ytimg.com/vi/TkZBN4GHCzo/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLC3FkzADl7SRWz8OXBrWyxHfluYAw">
+                </div>
+                <div class="video-detail">
+                    <div class="author">
+                        <img src="4th pro img.jpg">
+                    </div>
+                    <div class="title">
+                        <h3>𝐍𝐨𝐛 𝐭𝐨 𝐏𝐫𝐨: 𝟐𝟎𝟐𝟓 𝐃𝐚𝐭𝐚 𝐄𝐧𝐠𝐢𝐧𝐞𝐞𝐫𝐢𝐧𝐠 𝐑𝐨𝐚𝐝𝐦𝐚𝐩 in Tamil</h3>
+                        <a href="#">Data Engineering</a>
+                        <span>10k views 5 Hours Ago</span>
+                    </div>
+                </div>
+            </div>
+            <!--video end-->
+
+            <!--video starts-->
+
+            <div class="video">
+                <div class="video-thumbnail">
+                    <img src="https://i.ytimg.com/vi/nf1Xv-qTsuw/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBdGMOi54Z_BQaOlMELLTezCs8L0A">
+                </div>
+                <div class="video-detail">
+                    <div class="author">
+                        <img src="marvel.jpg">
+                    </div>
+                    <div class="title">
+                        <h3>Every MCU Reveal at SDCC 2024: Fantastic Four, Avengers: Doomsday & More! | Official Recap</h3>
+                        <a href="#">Marvel Entertainment</a>
+                        <span>15M views 5 Months Ago</span>
+                    </div>
+                </div>
+            </div>
+            <!--video end-->
+
+            <!--video starts-->
+
+            <div class="video">
+                <div class="video-thumbnail">
+                    <img src="https://i.ytimg.com/vi/QaLmRJR6ubo/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLB1y5Ob_qEdjI0oC0XBn1VL4r_41g">
+                </div>
+                <div class="video-detail">
+                    <div class="author">
+                        <img src="siddahmed1.jpg">
+                    </div>
+                    <div class="title">
+                        <h3>Easy Steps to Speak Better! 🎯🗣️ | Fan Q&A - Ask Me Anything! | Sidd Ahmed</h3>
+                        <a href="#">Sidd Ahmed</a>
+                        <span>4.6K views 3 Months Ago</span>
+                    </div>
+                </div>
+            </div>
+            <!--video end-->
+
+            <!--video starts-->
+
+            <div class="video">
+                <div class="video-thumbnail">
+                    <img src="https://i.ytimg.com/vi/TKgYe974xeI/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDJsQwaOy35Ipkbql5Ozr1xHugTZA">
+                </div>
+                <div class="video-detail">
+                    <div class="author">
+                        <img src="7th pic.jpg">
+                    </div>
+                    <div class="title">
+                        <h3>List Comprehensions | Python HackerRank Solution Explained Step-by-Step</h3>
+                        <a href="#">Decode The Code</a>
+                        <span>4K views 3 Months Ago</span>
+                    </div>
+                </div>
+            </div>
+            <!--video end-->
+
+            <!--video starts-->
+
+            <div class="video">
+                <div class="video-thumbnail">
+                    <img src="https://i.ytimg.com/vi/KPD8C7c6P1w/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLC7iliGd3XGxJk_5rl2aocetFVCwQ">
+                </div>
+                <div class="video-detail">
+                    <div class="author">
+                        <img src="8th pic.jpg">
+                    </div>
+                    <div class="title">
+                        <h3>How to land a Google internship</h3>
+                        <a href="#">Google Students</a>
+                        <span>398K views 4 Months Ago</span>
+                    </div>
+                </div>
+            </div>
+            <!--video end-->
+
+            <!--video starts-->
+
+            <div class="video">
+                <div class="video-thumbnail">
+                    <img src="https://i.ytimg.com/vi/8oYUlkQnst0/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAmIQlm9KWkBNrKZFx1tdTSKVZiRQ">
+                </div>
+                <div class="video-detail">
+                    <div class="author">
+                        <img src="siddahmed1.jpg">
+                    </div>
+                    <div class="title">
+                        <h3>Jumpstart Your Career with this WORKFORCE Program 🔥💼 | Returnship Series Part 7 | Sidd Ahmed</h3>
+                        <a href="#">Sidd Ahmed</a>
+                        <span>4K views 3 Hours Ago</span>
+                    </div>
+                </div>
+            </div>
+            <!--video end-->
+
+            <!--video starts-->
+
+            <div class="video">
+                <div class="video-thumbnail">
+                    <img src="https://i.ytimg.com/vi/tdSWciABBDs/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLB-RSLdRmTjqtLENTCY5qzizphfUA">
+                </div>
+                <div class="video-detail">
+                    <div class="author">
+                        <img src="9th pic.jpg">
+                    </div>
+                    <div class="title">
+                        <h3>Veera Dheera - Video Song | Kalki 2898 AD | Prabhas | Amitabh | Deepika | Kamal | Santhosh Narayanan</h3>
+                        <a href="#">Saregama Telugu</a>
+                        <span>9.1M views 11 Months Ago</span>
+                    </div>
+                </div>
+            </div>
+            <!--video end-->
+
+            <!--video starts-->
+
+            <div class="video">
+                <div class="video-thumbnail">
+                    <img src="https://i.ytimg.com/vi/FetEULnMgIs/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCSx55AjAuefKkNSRc0pXyqxNHJLQ">
+                </div>
+                <div class="video-detail">
+                    <div class="author">
+                        <img src="epaphra.jpg">
+                    </div>
+                    <div class="title">
+                        <h3>How to Build REAL Confidence: 3 EASY STEPS</h3>
+                        <a href="#">Explore with Epaphra</a>
+                        <span>255K views 9 Months Ago</span>
+                    </div>
+                </div>
+            </div>
+            <!--video end-->
+
+            <!--video starts-->
+
+            <div class="video">
+                <div class="video-thumbnail">
+                    <img src="https://i.ytimg.com/vi/obmCrdiJR24/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLDDapc4Ohy0E7i9cwEKzScwuN4wcg">
+                </div>
+                <div class="video-detail">
+                    <div class="author">
+                        <img src="10th pic.jpg">
+                    </div>
+                    <div class="title">
+                        <h3>The RajaSaab Telugu Teaser | Prabhas | Maruthi | Thaman | TG Vishwa Prasad | PMF | Dec 5 2025</h3>
+                        <a href="#">People Media Factory</a>
+                        <span>21M views 2 Weeks Ago</span>
+                    </div>
+                </div>
+            </div>
+            <!--video end-->
+        </div>
+
+    </div>
+
+    </div>
+    </div>
+  </body>
+ </head>
